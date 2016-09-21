@@ -1,0 +1,24 @@
+{
+  "name": "black-lamp/yii2-search",
+  "description": "Component for search on site for Yii2",
+  "keywords": ["yii2", "site", "search"],
+  "type": "yii2-extension",
+  "license": "GNU Public License",
+  "support": {
+    "source": "https://github.com/black-lamp/yii2-search"
+  },
+  "require": {
+    "yiisoft/yii2": ">=2.0.4"
+  },
+  "authors": [
+    {
+      "name": "Vladimir Kuprienko",
+      "email": "vldmr.kuprienko@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "bl\\search\\": ""
+    }
+  }
+}
