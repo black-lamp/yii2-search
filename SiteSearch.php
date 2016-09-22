@@ -118,9 +118,10 @@ class SiteSearch extends Component
         $description = $this->_entity->getSearchDescription();
         $descriptionVal = (is_callable($description)) ? $description($queryRes) : $this->getSearchItem($queryRes, $description);
 
-        $url = $this->parseRouteConfig($this->_entity->getSearchUrl(), $queryRes);
+        $url = $this->_entity->getSearchUrl();
+        $urlVal = (is_callable($url)) ? $url($queryRes) : $this->parseRouteConfig($url, $queryRes);
 
-        $resObject = new SearchResult($titleVal, $descriptionVal, $url);
+        $resObject = new SearchResult($titleVal, $descriptionVal, $urlVal);
         $this->_result[] = $resObject;
     }
 

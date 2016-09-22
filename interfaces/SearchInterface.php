@@ -16,7 +16,7 @@ interface SearchInterface
      *      return $fullname;
      * };
      * ```
-     * @return string title - field name in the model, static string or anonymous function
+     * @return string|object title - field name in the model, static string or anonymous function
      */
     public function getSearchTitle();
 
@@ -28,11 +28,12 @@ interface SearchInterface
      *      return $text;
      * };
      * ```
-     * @return string description - field name in the model, static string or anonymous function
+     * @return string|object description - field name in the model, static string or anonymous function
      */
     public function getSearchDescription();
 
     /**
+     * Array of route configuration
      * ```php
      * return [
      *      'route' => 'blog/article/{categoryId}/{id}', // url pattern
@@ -40,7 +41,16 @@ interface SearchInterface
      *      'id' => 'id'
      * ];
      * ```
-     * @return array route configuration
+     *
+     * Anonymous function
+     * ```php
+     * // $model - current model class object
+     * $url = function($model) {
+     *      return Url::toRoute(['articles/article/index', 'id' => $model->article_id]);
+     * };
+     * ```
+     *
+     * @return array|object route configuration or anonymous function
      */
     public function getSearchUrl();
 
