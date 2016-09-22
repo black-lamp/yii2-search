@@ -9,12 +9,26 @@ namespace bl\search\interfaces;
 interface SearchInterface
 {
     /**
-     * @return string title field name or static string
+     * ```php
+     * // $model - current model class object
+     * $title = function($model) {
+     *      $fullname = $model->firstname . ' ' . $model->lastname;
+     *      return $fullname;
+     * };
+     * ```
+     * @return string title - field name in the model, static string or anonymous function
      */
     public function getSearchTitle();
 
     /**
-     * @return string description field name or static string
+     * ```php
+     * // $model - current model class object
+     * $title = function($model) {
+     *      $text = $model->text . ' ' . $model->keywords;
+     *      return $text;
+     * };
+     * ```
+     * @return string description - field name in the model, static string or anonymous function
      */
     public function getSearchDescription();
 

@@ -5,22 +5,15 @@ namespace bl\search\data;
  * Class for contain of search result
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
+ *
+ * @property string $title
+ * @property string $description
+ * @property string $url
  */
 class SearchResult
 {
-    /**
-     * @var string
-     */
     public $title;
-
-    /**
-     * @var string
-     */
     public $description;
-
-    /**
-     * @var string
-     */
     public $url;
 
     /**

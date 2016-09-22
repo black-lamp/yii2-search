@@ -112,11 +112,15 @@ class SiteSearch extends Component
      * @see SiteSearch::parseRouteConfig()
      */
     protected function addToResult($queryRes) {
-        $title = $this->getSearchItem($queryRes, $this->_entity->getSearchTitle());
-        $description = $this->getSearchItem($queryRes, $this->_entity->getSearchDescription());
+        $title = $this->_entity->getSearchTitle();
+        $titleVal = (!is_string($title)) ? $title($queryRes) : $this->getSearchItem($queryRes, $title);
+
+        $description = $this->_entity->getSearchDescription();
+        $descriptionVal = (!is_string($description)) ? $description($queryRes) : $this->getSearchItem($queryRes, $description);
+
         $url = $this->parseRouteConfig($this->_entity->getSearchUrl(), $queryRes);
 
-        $resObject = new SearchResult($title, $description, $url);
+        $resObject = new SearchResult($titleVal, $descriptionVal, $url);
         $this->_result[] = $resObject;
     }
 
