@@ -19,18 +19,24 @@ to the require section of your composer.json.
             'class' => bl\search\SiteSearch::className(),
             // models where you need the search
             'models' => [
-                'chat-message' => [
-                    'class' => frontend\components\chat\entities\ChatMessage::className()
+                'blog' => [
+                    'class' => frontend\models\Article::className()
                  ],
                 // ...
             ]
       ],
 ]
 ```
-Using
------
-Implement interface in the models where you need the search
+#### Implement interface in the models where you need the search
 ```php
+/**
+ * @property integer $id
+ * @property integer $category_id
+ * @property string $title
+ * @property string $text
+ * @property string $short_text
+ * @property string $key_words
+ */
 class Article extends ActiveRecord implements \bl\search\interfaces\SearchInterface
 {
     // ...
@@ -46,7 +52,13 @@ class Article extends ActiveRecord implements \bl\search\interfaces\SearchInterf
          * @inheritdoc
          */
         public function getSearchDescription() {
-            return 'short_text';
+            // $model - current model class object
+            $description = function($model) {
+                $textWithKeywords = $model->short_text . ' ' . $model->key_words;
+                return $textWithKeywords;
+            };
+            
+            return $description;
         }
 
         /**
@@ -73,7 +85,9 @@ class Article extends ActiveRecord implements \bl\search\interfaces\SearchInterf
         }
 }
 ```
-and call method for get search results
+Using
+-----
+Call method for get search results
 ```php
 /**
  * @var \bl\search\SearchResult[] $result
