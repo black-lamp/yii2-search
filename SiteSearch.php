@@ -113,10 +113,10 @@ class SiteSearch extends Component
      */
     protected function addToResult($queryRes) {
         $title = $this->_entity->getSearchTitle();
-        $titleVal = (!is_string($title)) ? $title($queryRes) : $this->getSearchItem($queryRes, $title);
+        $titleVal = (is_callable($title)) ? $title($queryRes) : $this->getSearchItem($queryRes, $title);
 
         $description = $this->_entity->getSearchDescription();
-        $descriptionVal = (!is_string($description)) ? $description($queryRes) : $this->getSearchItem($queryRes, $description);
+        $descriptionVal = (is_callable($description)) ? $description($queryRes) : $this->getSearchItem($queryRes, $description);
 
         $url = $this->parseRouteConfig($this->_entity->getSearchUrl(), $queryRes);
 
