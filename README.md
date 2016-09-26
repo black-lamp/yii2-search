@@ -20,7 +20,8 @@ to the require section of your composer.json.
             // models where you need the search
             'models' => [
                 'blog' => [
-                    'class' => frontend\models\Article::className()
+                    'class' => frontend\models\Article::className(),
+                    'label' => 'Blog'
                  ],
                 // ...
             ]

@@ -15,18 +15,21 @@ class SearchResult
     public $title;
     public $description;
     public $url;
+    protected $modelName;
 
     /**
      * SearchResult constructor.
      * @param string $title
      * @param string $description
      * @param string $url
+     * @param string $modelName
      */
-    public function __construct($title, $description, $url)
+    public function __construct($title, $description, $url, $modelName)
     {
         $this->title = $title;
         $this->description = $description;
         $this->url = $url;
+        $this->modelName = $modelName;
     }
 
     /**
@@ -75,5 +78,27 @@ class SearchResult
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelName()
+    {
+        return $this->modelName;
+    }
+
+    /**
+     * @param SearchResult[] $searchResult
+     * @return SearchResult[]
+     */
+    public function sortByModel($searchResult)
+    {
+        $result = [];
+        foreach($searchResult as $obj) {
+            $result[$obj->modelName][] = $obj;
+        }
+
+        return $result;
     }
 }

@@ -67,9 +67,9 @@ class SiteSearch extends Component
      * @see SiteSearch::addToResult()
      */
     public function s($keyword) {
-        foreach($this->models as $model) {
+        foreach($this->models as $key => $model) {
             /** @var ActiveRecord|SearchInterface $entity */
-            $entity = Yii::createObject($model);
+            $entity = Yii::createObject($model['class']);
             /** @var ActiveRecord $modelName */
             $modelName = $entity::className();
 
@@ -105,6 +105,23 @@ class SiteSearch extends Component
     }
 
     /**
+     * Method for getting model label by model name
+     *
+     * @param string $modelName
+     * @return null|string
+     */
+    public function getModelLabel($modelName)
+    {
+        foreach($this->models as $model) {
+            if($model['class'] == $modelName) {
+                return $model['label'];
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Method for adding search result to the array of the results
      *
      * @param ActiveQuery $queryRes
@@ -121,7 +138,7 @@ class SiteSearch extends Component
         $url = $this->_entity->getSearchUrl();
         $urlVal = (is_callable($url)) ? $url($queryRes) : $this->parseRouteConfig($url, $queryRes);
 
-        $resObject = new SearchResult($titleVal, $descriptionVal, $urlVal);
+        $resObject = new SearchResult($titleVal, $descriptionVal, $urlVal, $queryRes->className());
         $this->_result[] = $resObject;
     }
 
