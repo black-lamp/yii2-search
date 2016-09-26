@@ -92,7 +92,7 @@ class SearchResult
      * @param SearchResult[] $searchResult
      * @return SearchResult[]
      */
-    public function sortByModel($searchResult)
+    public static function sortByModel($searchResult)
     {
         $result = [];
         foreach($searchResult as $obj) {
