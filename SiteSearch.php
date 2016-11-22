@@ -124,7 +124,7 @@ class SiteSearch extends Component
     /**
      * Method for adding search result to the array of the results
      *
-     * @param ActiveQuery $queryRes
+     * @param ActiveRecord $queryRes
      * @see SiteSearch::getSearchItem()
      * @see SiteSearch::parseRouteConfig()
      */
@@ -138,7 +138,10 @@ class SiteSearch extends Component
         $url = $this->_entity->getSearchUrl();
         $urlVal = (is_callable($url)) ? $url($queryRes) : $this->parseRouteConfig($url, $queryRes);
 
-        $resObject = new SearchResult($titleVal, $descriptionVal, $urlVal, $queryRes->className());
+        $resObject = new SearchResult(
+            $titleVal, $descriptionVal, $urlVal,
+            $queryRes->className(), $queryRes->getPrimaryKey()
+        );
         $this->_result[] = $resObject;
     }
 

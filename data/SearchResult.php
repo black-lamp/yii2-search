@@ -15,21 +15,27 @@ class SearchResult
     public $title;
     public $description;
     public $url;
+
     protected $modelName;
+    protected $modelId;
 
     /**
      * SearchResult constructor.
+     *
      * @param string $title
      * @param string $description
      * @param string $url
      * @param string $modelName
+     * @param integer $modelId
      */
-    public function __construct($title, $description, $url, $modelName)
+    public function __construct($title, $description, $url, $modelName, $modelId)
     {
         $this->title = $title;
         $this->description = $description;
         $this->url = $url;
+
         $this->modelName = $modelName;
+        $this->modelId = $modelId;
     }
 
     /**
@@ -89,6 +95,8 @@ class SearchResult
     }
 
     /**
+     * Method for sorting results of search by model name
+     *
      * @param SearchResult[] $searchResult
      * @return SearchResult[]
      */
