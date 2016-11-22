@@ -95,6 +95,14 @@ class SearchResult
     }
 
     /**
+     * @return int
+     */
+    public function getModelId()
+    {
+        return $this->modelId;
+    }
+
+    /**
      * Method for sorting results of search by model name
      *
      * @param SearchResult[] $searchResult
