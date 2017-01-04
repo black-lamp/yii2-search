@@ -1,41 +1,58 @@
 <?php
 namespace bl\search\data;
 
+use Yii;
+use yii\base\Configurable;
+use yii\db\BaseActiveRecord;
+
+use bl\search\interfaces\SearchInterface;
+
 /**
  * Class for contain of search result
- *
- * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  *
  * @property string $title
  * @property string $description
  * @property string $url
+ *
+ * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  */
-class SearchResult
+class SearchResult implements Configurable
 {
+    /**
+     * @var string
+     */
     public $title;
+    /**
+     * @var string
+     */
     public $description;
+    /**
+     * @var string
+     */
     public $url;
+    /**
+     * @var integer
+     */
+    public $modelId;
+    /**
+     * @var string
+     */
+    public $modelName;
 
-    protected $modelName;
-    protected $modelId;
 
     /**
      * SearchResult constructor.
      *
-     * @param string $title
-     * @param string $description
-     * @param string $url
-     * @param string $modelName
      * @param integer $modelId
+     * @param string $modelName
+     * @param array $options
      */
-    public function __construct($title, $description, $url, $modelName, $modelId)
+    public function __construct($modelId, $modelName, array $options = [])
     {
-        $this->title = $title;
-        $this->description = $description;
-        $this->url = $url;
-
-        $this->modelName = $modelName;
         $this->modelId = $modelId;
+        $this->modelName = $modelName;
+
+        Yii::configure($this, $options);
     }
 
     /**
@@ -103,6 +120,27 @@ class SearchResult
     }
 
     /**
+     * Method for building the class object from Active Record object
+     *
+     * @param BaseActiveRecord|SearchInterface $modelObject
+     * @return SearchResult
+     */
+    public static function build($modelObject)
+    {
+        $options = [
+            'title' => $modelObject->getSearchTitle(),
+            'description' => $modelObject->getSearchDescription(),
+            'url' => $modelObject->getSearchUrl()
+        ];
+
+        return new SearchResult(
+            $modelObject->getPrimaryKey(),
+            $modelObject::className(),
+            $options
+        );
+    }
+
+    /**
      * Method for sorting results of search by model name
      *
      * @param SearchResult[] $searchResult
@@ -110,11 +148,11 @@ class SearchResult
      */
     public static function sortByModel($searchResult)
     {
-        $result = [];
+        $sortedResult = [];
         foreach($searchResult as $obj) {
-            $result[$obj->modelName][] = $obj;
+            $sortedResult[$obj->modelName][] = $obj;
         }
 
-        return $result;
+        return $sortedResult;
     }
 }
