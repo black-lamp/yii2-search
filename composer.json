@@ -1,20 +1,27 @@
 {
     "name": "black-lamp/yii2-search",
-    "description": "Component for search on site for Yii2",
-    "keywords": ["yii2", "component", "site", "search"],
+    "description": "Component for search in Active Record models",
+    "keywords": ["yii2", "component", "search", "active", "record"],
     "type": "yii2-extension",
-    "license": "GNU Public License",
+    "license": "BSD-3-Clause",
     "support": {
         "source": "https://github.com/black-lamp/yii2-search",
         "issues": "https://github.com/black-lamp/yii2-search/issues"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "require": {
-        "yiisoft/yii2": ">=2.0.4"
+        "yiisoft/yii2": "^2.0.4"
     },
     "authors": [
         {
             "name": "Vladimir Kuprienko",
-            "email": "vldmr.kuprienko@gmail.com"
+            "email": "vldmr.kuprienko@gmail.com",
+            "role": "lead"
         }
     ],
     "autoload": {

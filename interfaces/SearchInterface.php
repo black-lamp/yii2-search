@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/black-lamp/yii2-search
+ * @copyright Copyright (c) 2016 Vladimir Kuprienko
+ * @license BSD 3-Clause License
+ */
+
 namespace bl\search\interfaces;
 
 /**
