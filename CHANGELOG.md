@@ -10,6 +10,7 @@ black-lamp/yii2-search commits history
 - Renamed `SiteSearch` component to `SearchComponent`
 - Refactored code
 - Changed license
+- Changed project file structure
 
 ## [1.1.1] - 2016-10-22
 

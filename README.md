@@ -14,7 +14,7 @@ composer require black-lamp/yii2-search
 ```
 or add
 ```json
-"black-lamp/yii2-search": "*"
+"black-lamp/yii2-search": "2.0.0"
 ```
 to the require section of your composer.json.
 #### Add 'SiteSearch' component to application config
@@ -22,11 +22,11 @@ to the require section of your composer.json.
 'components' => [
       // ...
       'search' => [
-            'class' => bl\search\SearchComponent::className(),
+            'class' => bl\search\SearchComponent::class,
             // models where you need the search
             'models' => [
                 'article' => [
-                    'class' => frontend\models\Article::className(),
+                    'class' => frontend\models\Article::class,
                     'label' => 'Articles'
                  ],
                 // ...
@@ -34,7 +34,12 @@ to the require section of your composer.json.
       ],
 ]
 ```
-#### Implement interface in the models where you need the search
+To models array you should to add the active record models where component will be make a search.
+
+`class` it's a model's name.
+
+`label` it's a title for displaying in view.
+#### Implement [interface](https://github.com/black-lamp/yii2-search/blob/master/interfaces/SearchInterface.php) in the models where you need a search
 ```php
 /**
  * @property integer $id
@@ -82,7 +87,8 @@ class Article extends ActiveRecord implements \bl\search\interfaces\SearchInterf
 ```
 Using
 -----
-Call method for get search results
+Call method for getting a search results.
+This method return a [SearchResult](https://github.com/black-lamp/yii2-search/blob/master/data/SearchResult.php) objects in array.
 ```php
 /**
  * @var \bl\search\data\SearchResult[] $result
