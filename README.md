@@ -39,7 +39,7 @@ To models array you should to add the active record models where component will 
 `class` it's a model's name.
 
 `label` it's a title for displaying in view.
-#### Implement [interface](https://github.com/black-lamp/yii2-search/blob/master/interfaces/SearchInterface.php) in the models where you need a search
+#### Implement [interface](https://github.com/black-lamp/yii2-search/blob/master/src/interfaces/SearchInterface.php) in the models where you need a search
 ```php
 /**
  * @property integer $id
@@ -88,7 +88,7 @@ class Article extends ActiveRecord implements \bl\search\interfaces\SearchInterf
 Using
 -----
 Call method for getting a search results.
-This method return a [SearchResult](https://github.com/black-lamp/yii2-search/blob/master/data/SearchResult.php) objects in array.
+This method return a [SearchResult](https://github.com/black-lamp/yii2-search/blob/master/src/data/SearchResult.php) objects in array.
 ```php
 /**
  * @var \bl\search\data\SearchResult[] $result

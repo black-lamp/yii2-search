@@ -1,7 +1,7 @@
 black-lamp/yii2-search commits history
 ------------------------------------------
 
-## [Under development]
+## [2.0.0] - 2016-01-05
 
 ### Added
 - Added unit tests
