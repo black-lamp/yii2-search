@@ -54,6 +54,9 @@ class SearchComponentTest extends DbTestCase
         $actual = $result[0]->title;
 
         $this->assertEquals($expected, $actual, 'Method must find string in database');
+
+        $this->assertEquals('tests\models\Article', $result[0]->modelName, 'Result should contain a model name');
+        $this->assertEquals(1, $result[0]->modelId, 'Result should containt a primary key of model');
     }
 
     public function testGetModelLabel()

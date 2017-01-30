@@ -70,7 +70,7 @@ class SearchComponent extends Component
 
             if($ar instanceof SearchInterface && $ar instanceof ActiveRecordInterface) {
                 $searchFields = $ar->getSearchFields();
-                $activeQuery = $ar::find()->select($searchFields);
+                $activeQuery = $ar::find();
 
                 foreach($searchFields as $field) {
                     if($ar->hasAttribute($field)) {
