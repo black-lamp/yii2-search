@@ -14,7 +14,7 @@ composer require black-lamp/yii2-search
 ```
 or add
 ```json
-"black-lamp/yii2-search": "2.0.0"
+"black-lamp/yii2-search": "^2.0.0"
 ```
 to the require section of your composer.json.
 #### Add 'SiteSearch' component to application config
