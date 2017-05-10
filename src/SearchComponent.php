@@ -15,6 +15,7 @@ use yii\db\ActiveRecordInterface;
 
 use bl\search\data\SearchResult;
 use bl\search\interfaces\SearchInterface;
+use bl\search\interfaces\SearcherInterface;
 
 /**
  * Component for search on site in Active Record models
@@ -65,10 +66,13 @@ class SearchComponent extends Component
      */
     public function search($query) {
         foreach($this->models as $model) {
-            /** @var ActiveRecordInterface|SearchInterface $ar */
+            /** @var ActiveRecordInterface|SearchInterface|SearcherInterface $ar */
             $ar = Yii::createObject($model['class']);
 
-            if($ar instanceof SearchInterface && $ar instanceof ActiveRecordInterface) {
+            if($ar instanceof SearcherInterface && $ar instanceof ActiveRecordInterface) {
+                $activeQuery = $ar->search($query);
+            }
+            else if($ar instanceof SearchInterface && $ar instanceof ActiveRecordInterface) {
                 $searchFields = $ar->getSearchFields();
                 $activeQuery = $ar::find();
 
@@ -82,15 +86,16 @@ class SearchComponent extends Component
                     }
                 }
 
-                $modelObjects = $activeQuery->all();
-                if($modelObjects != null) {
-                    $this->_currentModel = $ar;
-                    $this->addToResult($modelObjects);
-                }
             }
             else {
                 $message = sprintf("%s should be instance of `%s` and `%s`", $ar, SearchInterface::class, ActiveRecordInterface::class);
                 throw new InvalidConfigException($message);
+            }
+
+            $modelObjects = $activeQuery->all();
+            if($modelObjects != null) {
+                $this->_currentModel = $ar;
+                $this->addToResult($modelObjects);
             }
         }
 
